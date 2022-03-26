@@ -2,6 +2,10 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+#include "AppManager.h"
+//#include "PathListModel.h"
+//#include "EventTableModel.h"
+
 int main(int argc, char *argv[])
 {
 
@@ -9,9 +13,15 @@ int main(int argc, char *argv[])
 
   QQmlApplicationEngine engine;
 
-  //engine.rootContext()->setContextProperty("Network", tem.getCommNetwrk());
+  AppManager manager;
 
-  engine.load(QUrl(QStringLiteral("qrc:/MainPage.qml")));
+  engine.rootContext()->setContextProperty("AppManager", &manager);
+
+  engine.rootContext()->setContextProperty("PathListModel", manager.getPathList());
+
+  engine.rootContext()->setContextProperty("EventTableModel", manager.getEventTable());
+
+  engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
   if (engine.rootObjects().isEmpty()) { return -1; }
 

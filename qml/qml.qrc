@@ -1,9 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>MainPage.qml</file>
-        <file>contents/StyledButton.qml</file>
-        <file>contents/FileDialog.qml</file>
+        <file>main.qml</file>
+        <file>contents/CustomButton.qml</file>
         <file>contents/PathList.qml</file>
         <file>contents/EventTable.qml</file>
+        <file>contents/CustomTextField.qml</file>
+        <file>MainView.qml</file>
+        <file>Theme.qml</file>
     </qresource>
 </RCC>

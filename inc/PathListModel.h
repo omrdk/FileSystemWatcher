@@ -3,34 +3,37 @@
 
 #include <QAbstractListModel>
 
+struct Content {
+  QString path;
+  //...
+};
+
 class PathList : public QAbstractListModel
 {
-    Q_OBJECT
+  Q_OBJECT
+
+  private:
+    QList<Content> m_paths;
 
   public:
     explicit PathList(QObject *parent = nullptr);
 
-    // Header:
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    enum Roles {
+        PathRole = Qt::UserRole + 1
+    };
 
-    // Basic functionality:
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    Q_INVOKABLE void addPathToList(const QString &path);
 
-    // Fetch data dynamically:
-    bool hasChildren(const QModelIndex &parent = QModelIndex()) const override;
-
-    bool canFetchMore(const QModelIndex &parent) const override;
-    void fetchMore(const QModelIndex &parent) override;
+    Q_INVOKABLE void removePathFromList(const int &i);
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    // Add data:
-    bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
-    // Remove data:
-    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-  private:
+  protected:
+    QHash<int, QByteArray> roleNames() const;
 };
 
 #endif // PATHLIST_H

@@ -1,3 +1,4 @@
 CMakeLists.txt.user*
+.gitignore.swp*
 **/build
 **/.vscode
