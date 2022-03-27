@@ -42,8 +42,10 @@ Item {
     }
 
     onClicked: {
-      console.log("add button pressed")
-      PathListModel.addPathToList(_.selectedPath)
+      if (pathInput.text !== "") {
+        PathListModel.addPathToList(_.selectedPath)
+        AppManager.addPathToFileWatcher(_.selectedPath)
+      }
     }
   }
 
@@ -62,6 +64,13 @@ Item {
   // log table
   EventTable {
     id: eventTable
+
+    width: 600
+    height: 200
+
+    anchors {
+      top: pathList.bottom
+    }
   }
 
   // clear list button
@@ -79,6 +88,7 @@ Item {
 
     onClicked: {
       console.log("clear button pressed")
+      // clear the table content
     }
   }
 
@@ -96,7 +106,7 @@ Item {
     }
 
     onClicked: {
-      console.log("start button pressed")
+      AppManager.startFileWatcher()
     }
   }
 
@@ -114,7 +124,7 @@ Item {
     }
 
     onClicked: {
-      console.log("stop button pressed")
+      AppManager.stopFileWatcher()
     }
   }
 }

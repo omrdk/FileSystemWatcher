@@ -1,4 +1,6 @@
 import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 
 /**
@@ -36,28 +38,24 @@ Item {
       width: listView.width
       height: 50
 
-      Row {
+      RowLayout {
+        width: parent.width
 
-        Rectangle {
+        TextField {
           id: pathDelegate
 
-          width: 500
-          height: 50
-          color: theme.backgroundColor
+          Layout.fillWidth: true
 
-          Text {
-            id: path
+          text: model.path
 
-            //required property string path
-            //required property string imagePath
-            anchors {
-              verticalCenter: parent.verticalCenter
-            }
+          background: Rectangle {
+            id: background
+            anchors.fill: parent
 
-            text: model.path // + model.imagePath
-
-            // elide: Text.ElideRight
+            radius: 5
+            color: theme.backgroundColor
           }
+          onEditingFinished: model.path = text
         }
 
         CustomButton {
@@ -70,7 +68,6 @@ Item {
 
           onClicked: {
             console.log("item removed from list")
-            // delete from list
             PathListModel.removePathFromList(index)
             // send event to table
           }
@@ -85,15 +82,11 @@ Item {
 
     anchors.fill: parent
 
+    clip: true
+
     model: PathListModel
 
     delegate: contactDelegate
-
-    //    highlight: Rectangle {
-    //      color: "lightsteelblue"
-    //      radius: 5
-    //    }
-    //    focus: true
   }
 
   //* CONNECTIONS
@@ -101,20 +94,4 @@ Item {
   //* SLOTS (onSignalFunctions)
 
   //* FUNCTIONS
-  ListModel {
-    id: dakmodal
-    ListElement {
-      imagePath: "2.jpg"
-      imageName: "house"
-    }
-    ListElement {
-      imagePath: "1.jpg"
-      imageName: "flower"
-    }
-
-    ListElement {
-      imagePath: "3.jpg"
-      imageName: "water"
-    }
-  }
 }

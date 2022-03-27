@@ -71,7 +71,7 @@ void FileManager::chooseClicked()
   {
     if (index.column()== 0)
     {
-      m_selectedFiles.append(this->directory().absolutePath() + index.data().toString());
+      m_selectedFiles.append(this->directory().absolutePath() + QDir::separator() + index.data().toString());
     }
   }
 

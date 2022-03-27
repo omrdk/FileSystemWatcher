@@ -11,21 +11,25 @@
 
 class FileManager : public QFileDialog{
   Q_OBJECT
-private:
-  QListView *m_listView  = 0;
-  QTreeView *m_treeView  = 0;
-  QPushButton *m_btnOpen = 0;
+  private:
 
-  QStringList m_selectedFiles;
+    QListView *m_listView  = 0;
+    QTreeView *m_treeView  = 0;
+    QPushButton *m_btnOpen = 0;
 
-public slots:
-  void chooseClicked();
-public:
-  FileManager();
+    QStringList m_selectedFiles;
 
-  QStringList selectedFiles();
+  public:
 
-  bool eventFilter(QObject* watched, QEvent* event);
+    FileManager();
+
+    QStringList selectedFiles();
+
+    bool eventFilter(QObject* watched, QEvent* event);
+
+  public slots:
+
+    void chooseClicked();
 
 };
 

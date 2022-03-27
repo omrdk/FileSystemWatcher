@@ -2,12 +2,11 @@
 #define APPMANAGER_H
 
 #include <QObject>
+#include <QFileSystemWatcher>
 
 #include "FileManager.h"
 #include "PathListModel.h"
 #include "EventTableModel.h"
-
-
 
 class AppManager : public QObject
 {
@@ -16,6 +15,16 @@ class AppManager : public QObject
   private:
     PathList    _list;
     EventTable _table;
+
+    QFileSystemWatcher watcher;
+
+    QMap<QString, QStringList> entryHistory;
+
+    void fileSystemEventTriggered(const QString &path);
+
+    void directorySystemEventTriggered(const QString &path);
+
+    void sendEventToTable(const QStringList &oldEntries, const QStringList &newEntries, QString path);
 
   public:
     explicit AppManager(QObject *parent = nullptr);
@@ -29,6 +38,11 @@ class AppManager : public QObject
 
     Q_INVOKABLE QString getFileOrDirectoryPath() const;
 
+    Q_INVOKABLE void addPathToFileWatcher(const QString &path);
+
+    Q_INVOKABLE void startFileWatcher();
+
+    Q_INVOKABLE void stopFileWatcher();
 
   signals:
 
