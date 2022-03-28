@@ -1,25 +1,28 @@
 import QtQuick
 import QtQuick.Controls
 
+
+/**
+  Allows selection of the path that can be watched.
+  Not editable, works like a button but keeps the path string on it
+  */
 Item {
   id: root
 
   property alias text: textFieldItem.text
 
-  signal clicked
+  property alias placeHolderText: textFieldItem.placeholderText
 
-  QtObject {
-    id: _
-  }
+  signal clicked
 
   TextField {
     id: textFieldItem
 
     anchors.fill: parent
 
-    //focus: true
     background: Rectangle {
       id: background
+
       anchors.fill: parent
 
       border {
@@ -28,12 +31,15 @@ Item {
       }
 
       radius: 5
+
       color: theme.backgroundColor
     }
 
     MouseArea {
       id: clickArea
+
       anchors.fill: parent
+
       onClicked: {
         root.clicked()
       }

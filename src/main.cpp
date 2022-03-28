@@ -3,8 +3,6 @@
 #include <QQmlContext>
 
 #include "AppManager.h"
-//#include "PathListModel.h"
-//#include "EventTableModel.h"
 
 int main(int argc, char *argv[])
 {

@@ -5,20 +5,15 @@ import "contents"
 
 Window {
   id: root
+
   visible: true
-  width: 800
-  height: 800
-  title: qsTr("ScytheCase")
-  color: "lightgray"
 
-  // property string var: 0
+  width: 700
+  height: 650
 
-  // signal blabla()
-  QtObject {
+  title: qsTr("File System Watcher")
 
-    id: _
-    //  // Write your private and inaccessible vars & funcs//
-  }
+  color: theme.backgroundColor
 
   Theme {
     id: theme
@@ -29,14 +24,4 @@ Window {
 
     anchors.fill: parent
   }
-
-  //* ITEM PROPERTIES
-
-  //* CHILD ITEMS
-
-  //* CONNECTIONS
-
-  //* SLOTS (onSignalFunctions)
-
-  //* FUNCTIONS
 }

@@ -1,19 +1,13 @@
 import QtQuick
 import QtQuick.Layouts
-
 import Qt.labs.qmlmodels
 
 
 /**
-  Keeps track and displays all event
+  Table model, keeps track and displays all event of watched paths(created, deleted, edited)
   */
 Item {
   id: root
-
-  QtObject {
-    id: _
-    // Write your private and inaccessible vars & funcs
-  }
 
   Rectangle {
     id: background
@@ -30,27 +24,27 @@ Item {
   }
 
   Component {
-    id: contactDelegate2
+    id: contactDelegate
 
     Item {
-      width: tableview.width
+      id: contactItem
 
-      implicitHeight: 50
-      implicitWidth: 150
+      implicitWidth: tableview.width
+      implicitHeight: 30
 
       Rectangle {
         id: bgEventType
 
+        height: 50
+
         anchors.fill: parent
 
-        color: (heading === true) ? "gray" : "lightgray"
+        color: (heading === true) ? theme.secondaryBackgroundColor : theme.backgroundColor
 
         border {
           color: theme.borderColor
           width: 2
         }
-
-        height: 50
 
         Text {
           id: eventType
@@ -67,58 +61,18 @@ Item {
     id: tableview
     required model
 
+    property var columnWidths: [100, 290, 80, 150]
+
     anchors.fill: parent
 
-    //columnSpacing: 1
-    rowSpacing: 1
+    columnWidthProvider: function (column) {
+      return columnWidths[column]
+    }
 
     clip: true
 
     model: EventTableModel
 
-    //    model: TableModel {
-    //      TableModelColumn {
-    //        display: "name"
-    //      }
-    //      TableModelColumn {
-    //        display: "color"
-    //      }
-    //      TableModelColumn {
-    //        display: "type"
-    //      }
-    //      TableModelColumn {
-    //        display: "size"
-    //      }
-
-    //      rows: [{
-    //          "name": "cat",
-    //          "color": "black",
-    //          "type": "5",
-    //          "size": "10"
-    //        }
-    //        /* {
-    //          "name": "dog",
-    //          "color": "brown"
-    //        }, {
-    //          "name": "bird",
-    //          "color": "white"
-    //        }*/ ]
-    //    }
-    delegate: contactDelegate2
-
-    //* PROPERTIES DECLARATIONS
-    // property string var: 0
-
-    //* SIGNALS
-
-    // signal blabla()
-
-    //* CHILD ITEMS
-
-    //* CONNECTIONS
-
-    //* SLOTS (onSignalFunctions)
-
-    //* FUNCTIONS
+    delegate: contactDelegate
   }
 }

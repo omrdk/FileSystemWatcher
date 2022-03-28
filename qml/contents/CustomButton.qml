@@ -3,7 +3,7 @@ import QtQuick.Controls
 
 
 /**
-  Costumized button
+  Costumized button for; add paths to listview, start/stop file watcher & clear tableview
   */
 Item {
   id: root
@@ -11,10 +11,6 @@ Item {
   property alias text: textItem.text
 
   signal clicked
-
-  QtObject {
-    id: _
-  }
 
   Rectangle {
     id: background
@@ -31,22 +27,29 @@ Item {
 
   Text {
     id: textItem
+
     anchors.centerIn: parent
   }
 
   MouseArea {
     id: clickArea
+
     anchors.fill: parent
+
     onClicked: {
       root.clicked()
     }
+
+    onPressed: {
+      background.color = theme.secondaryBackgroundColor
+
+      textItem.color = theme.textColor
+    }
+
+    onReleased: {
+      background.color = theme.backgroundColor
+
+      textItem.color = theme.textColor
+    }
   }
-
-  //* CHILD ITEMS
-
-  //* CONNECTIONS
-
-  //* SLOTS (onSignalFunctions)
-
-  //* FUNCTIONS
 }

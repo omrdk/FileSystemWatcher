@@ -8,26 +8,44 @@ PathList::PathList(QObject *parent)
 QHash<int, QByteArray> PathList::roleNames() const
 {
   return { { PathRole, "path" },
-           //...
+             //...
   };
 }
 
 int PathList::rowCount(const QModelIndex &parent) const
 {
   Q_UNUSED(parent);
-//  if(parent.isValid() || !m_paths)
-//  {
-//    return 0;
-//  }
+
+  if(parent.isValid())
+  {
+    return 0;
+  }
+
   return m_paths.count();
+}
+
+QVariant PathList::data(const QModelIndex &index, int role) const
+{
+  if (!index.isValid())
+  {
+    return QVariant();
+  }
+
+  const QString path = m_paths.at(index.row());
+
+  switch (role) {
+    case PathRole: return path;
+  }
+
+  return QVariant();
 }
 
 bool PathList::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-//  if(!m_paths)
-//  {
-//    return 0;
-//  }
+  if(!index.isValid())
+  {
+    return 0;
+  }
 
   QString path = m_paths.at(index.row());
   switch (role) {
@@ -44,22 +62,6 @@ bool PathList::setData(const QModelIndex &index, const QVariant &value, int role
   return false;
 }
 
-QVariant PathList::data(const QModelIndex &index, int role) const
-{
-//  if (parent.isValid() || !m_paths)
-//  {
-//    return QVariant();
-//  }
-  const QString path = m_paths.at(index.row());
-
-  switch (role) {
-  case PathRole: // fallthrough
-    return path;
-  }
-
-  return QVariant();
-}
-
 Qt::ItemFlags PathList::flags(const QModelIndex &index) const
 {
   if(!index.isValid())
@@ -69,23 +71,25 @@ Qt::ItemFlags PathList::flags(const QModelIndex &index) const
   return Qt::ItemIsEditable;
 }
 
+QString PathList::getPathAt(const int &index)
+{
+  return m_paths[index];
+}
+
 void PathList::addPathToList(const QString &path)
 {
-
-  if(m_paths.contains(path))
+  if(!m_paths.contains(path))
   {
-    return;
+    int rowIndex = rowCount();
+
+    beginInsertRows(QModelIndex(), rowIndex, rowIndex);
+
+    m_paths.append(path);
+
+    endInsertRows();
+
+    qDebug() << path << " added to listview!";
   }
-
-  int rowIndex = rowCount();
-
-  beginInsertRows(QModelIndex(), rowIndex, rowIndex);
-
-  m_paths.append(path);
-
-  endInsertRows();
-
-  qDebug() << path << " added to listview!";
 }
 
 void PathList::removePathFromList(const int &i)
@@ -101,7 +105,6 @@ void PathList::removePathFromList(const int &i)
 
 bool PathList::setItemAt(int index, const QString &path)
 {
-  // buradan durum dondur tabloya iletmek icin aynisi ekleme ve silme icinde gecerli
   if(index < 0 || index >= m_paths.size() )
   {
     return false;

@@ -22,9 +22,11 @@ class PathList : public QAbstractListModel
         PathRole = Qt::DisplayRole,
     };
 
-    Q_INVOKABLE void addPathToList(const QString &path);
+    QString getPathAt(const int &index);
 
-    Q_INVOKABLE void removePathFromList(const int &i);
+    void addPathToList(const QString &path);
+
+    void removePathFromList(const int &i);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 

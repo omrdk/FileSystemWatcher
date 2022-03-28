@@ -11,7 +11,8 @@ class EventTable : public QAbstractTableModel
 
     explicit EventTable(QObject *parent = nullptr);
 
-    enum TableRoles {
+    enum TableRoles
+    {
       DataRole = Qt::UserRole + 1,
       HeadingRole
     };
@@ -24,9 +25,15 @@ class EventTable : public QAbstractTableModel
 
     QHash<int, QByteArray> roleNames() const override;
 
+    void addRowToTable(const QVector<QString> &data);
+
+    void clearTable();
+
   private:
 
     QVector<QVector<QString>> m_table;
+
+    QVector<QString> header = { "Event type", "Path", "Is folder", "Timestamp" };
 };
 
 #endif // EVENTTABLE_H

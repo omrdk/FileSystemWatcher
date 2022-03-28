@@ -1,10 +1,10 @@
-import QtQuick 2.0
+import QtQuick
+
 import "contents"
 
 Item {
   id: root
 
-  // path input section
   QtObject {
     id: _
 
@@ -15,16 +15,22 @@ Item {
     id: pathInput
 
     width: 500
-    height: 50
+    height: 40
 
     anchors {
       top: parent.top
       left: parent.left
+      topMargin: 10
+      leftMargin: 10
     }
 
-    // place holder will be added
+    placeHolderText: "Add path to watch"
+
     onClicked: {
+      text = ""
+
       _.selectedPath = AppManager.getFileOrDirectoryPath()
+
       text = _.selectedPath
     }
   }
@@ -34,16 +40,21 @@ Item {
     id: addButton
 
     width: 100
-    height: 50
-    text: "Add"
+    height: 40
 
     anchors {
+      top: parent.top
       left: pathInput.right
+      topMargin: 10
+      leftMargin: 10
     }
+
+    text: "Add"
 
     onClicked: {
       if (pathInput.text !== "") {
-        PathListModel.addPathToList(_.selectedPath)
+        AppManager.addPathToListInterface(_.selectedPath)
+
         AppManager.addPathToFileWatcher(_.selectedPath)
       }
     }
@@ -53,11 +64,14 @@ Item {
   PathList {
     id: pathList
 
-    width: 600
+    width: 610
     height: 200
 
     anchors {
       top: pathInput.bottom
+      left: parent.left
+      topMargin: 40
+      leftMargin: 10
     }
   }
 
@@ -65,11 +79,14 @@ Item {
   EventTable {
     id: eventTable
 
-    width: 600
+    width: 620
     height: 200
 
     anchors {
       top: pathList.bottom
+      left: parent.left
+      topMargin: 40
+      leftMargin: 10
     }
   }
 
@@ -78,17 +95,19 @@ Item {
     id: clearButton
 
     width: 100
-    height: 50
+    height: 40
+
     text: "Clear"
 
     anchors {
       left: parent.left
-      bottom: parent.bottom
+      top: eventTable.bottom
+      leftMargin: 10
+      topMargin: 10
     }
 
     onClicked: {
-      console.log("clear button pressed")
-      // clear the table content
+      AppManager.clearTableInterface()
     }
   }
 
@@ -97,12 +116,15 @@ Item {
     id: startButton
 
     width: 100
-    height: 50
+    height: 40
+
     text: "Start"
 
     anchors {
       left: clearButton.right
-      bottom: parent.bottom
+      top: eventTable.bottom
+      leftMargin: 10
+      topMargin: 10
     }
 
     onClicked: {
@@ -115,12 +137,15 @@ Item {
     id: stopButton
 
     width: 100
-    height: 50
+    height: 40
+
     text: "Stop"
 
     anchors {
       left: startButton.right
-      bottom: parent.bottom
+      top: eventTable.bottom
+      leftMargin: 10
+      topMargin: 10
     }
 
     onClicked: {

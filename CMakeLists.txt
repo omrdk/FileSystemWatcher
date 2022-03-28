@@ -7,7 +7,7 @@ project(ScytheCase)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PROJECT_DIR ${CMAKE_SOURCE_DIR})
@@ -18,13 +18,13 @@ set(PROJECT_INCLUDE_DIR ${PROJECT_DIR}/inc)
 set(PROJECT_SOURCES
             ${PROJECT_SOURCE_DIR}/main.cpp
 						${PROJECT_SOURCE_DIR}/AppManager.cpp
-						${PROJECT_SOURCE_DIR}/FileManager.cpp
+						#${PROJECT_SOURCE_DIR}/FileManager.cpp
 						${PROJECT_SOURCE_DIR}/PathListModel.cpp
 						${PROJECT_SOURCE_DIR}/EventTableModel.cpp
             )
 set(PROJECT_HEADERS
 	          ${PROJECT_INCLUDE_DIR}/AppManager.h
-						${PROJECT_INCLUDE_DIR}/FileManager.h
+						#{PROJECT_INCLUDE_DIR}/FileManager.h
 						${PROJECT_INCLUDE_DIR}/PathListModel.h
 						${PROJECT_INCLUDE_DIR}/EventTableModel.h
             )

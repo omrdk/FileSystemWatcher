@@ -4,19 +4,11 @@ import QtQuick.Layouts
 
 
 /**
-  It contains watched paths
+  List model, keeps paths that can be watched.
   */
 Item {
   id: root
 
-  //* PROPERTIES DECLARATIONS
-
-  //* SIGNALS
-  QtObject {
-    id: _
-  }
-
-  //* CHILD ITEMS
   Rectangle {
     id: background
     anchors.fill: parent
@@ -35,8 +27,11 @@ Item {
     id: contactDelegate
 
     Item {
-      width: listView.width
-      height: 50
+      id: contactItem
+
+      implicitWidth: listView.width
+
+      implicitHeight: 30
 
       RowLayout {
         width: parent.width
@@ -50,11 +45,14 @@ Item {
 
           background: Rectangle {
             id: background
+
             anchors.fill: parent
 
             radius: 5
+
             color: theme.backgroundColor
           }
+
           onEditingFinished: model.path = text
         }
 
@@ -62,18 +60,27 @@ Item {
           id: removeButton
 
           width: 100
-          height: 50
+          height: 30
 
           text: "Remove"
 
           onClicked: {
-            console.log("item removed from list")
+            AppManager.removePathFromMap(index)
+
             PathListModel.removePathFromList(index)
-            // send event to table
           }
         }
       }
     }
+  }
+
+  Text {
+    id: label
+    text: "Watched paths"
+
+    anchors.bottom: listView.top
+
+    font.pointSize: 16
   }
 
   ListView {
@@ -88,10 +95,4 @@ Item {
 
     delegate: contactDelegate
   }
-
-  //* CONNECTIONS
-
-  //* SLOTS (onSignalFunctions)
-
-  //* FUNCTIONS
 }
