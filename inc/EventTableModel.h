@@ -33,7 +33,7 @@ class EventTable : public QAbstractTableModel
 
     QVector<QVector<QString>> m_table;
 
-    QVector<QString> header = { "Event type", "Path", "Is folder", "Timestamp" };
+    QVector<QString> _header = { "Event type", "Path", "Is folder", "Timestamp" };
 };
 
 #endif // EVENTTABLE_H

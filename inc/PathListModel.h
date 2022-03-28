@@ -8,7 +8,6 @@ class PathList : public QAbstractListModel
   Q_OBJECT
 
   private:
-    QString path;
 
     QList<QString> m_paths;
 
@@ -22,12 +21,6 @@ class PathList : public QAbstractListModel
         PathRole = Qt::DisplayRole,
     };
 
-    QString getPathAt(const int &index);
-
-    void addPathToList(const QString &path);
-
-    void removePathFromList(const int &i);
-
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
@@ -35,6 +28,12 @@ class PathList : public QAbstractListModel
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
     Qt::ItemFlags flags(const QModelIndex& index) const override;
+
+    QString getPathAt(const int &index);
+
+    void addPathToList(const QString &path);
+
+    void removePathFromList(const int &i);
 
   protected:
 

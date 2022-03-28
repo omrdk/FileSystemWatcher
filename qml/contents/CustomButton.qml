@@ -14,6 +14,7 @@ Item {
 
   Rectangle {
     id: background
+
     anchors.fill: parent
 
     border {
@@ -22,6 +23,7 @@ Item {
     }
 
     radius: 5
+
     color: theme.backgroundColor
   }
 

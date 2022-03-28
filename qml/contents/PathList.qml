@@ -11,6 +11,7 @@ Item {
 
   Rectangle {
     id: background
+
     anchors.fill: parent
 
     border {
@@ -34,6 +35,8 @@ Item {
       implicitHeight: 30
 
       RowLayout {
+        id: rowLayout
+
         width: parent.width
 
         TextField {
@@ -76,9 +79,10 @@ Item {
 
   Text {
     id: label
-    text: "Watched paths"
 
     anchors.bottom: listView.top
+
+    text: "Watched paths"
 
     font.pointSize: 16
   }

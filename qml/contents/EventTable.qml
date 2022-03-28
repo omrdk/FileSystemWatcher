@@ -39,12 +39,12 @@ Item {
 
         anchors.fill: parent
 
-        color: (heading === true) ? theme.secondaryBackgroundColor : theme.backgroundColor
-
         border {
           color: theme.borderColor
           width: 2
         }
+
+        color: (heading === true) ? theme.secondaryBackgroundColor : theme.backgroundColor
 
         Text {
           id: eventType
@@ -65,14 +65,14 @@ Item {
 
     anchors.fill: parent
 
-    columnWidthProvider: function (column) {
-      return columnWidths[column]
-    }
-
     clip: true
 
     model: EventTableModel
 
     delegate: contactDelegate
+
+    columnWidthProvider: function (column) {
+      return columnWidths[column]
+    }
   }
 }

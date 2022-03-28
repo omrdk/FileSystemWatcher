@@ -10,7 +10,6 @@ Item {
   id: root
 
   property alias text: textFieldItem.text
-
   property alias placeHolderText: textFieldItem.placeholderText
 
   signal clicked

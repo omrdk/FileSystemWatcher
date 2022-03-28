@@ -22,7 +22,7 @@ class AppManager : public QObject
 
     EventTable _table;
 
-    QFileSystemWatcher watcher;
+    QFileSystemWatcher _watcher;
 
     QMap<QString, QStringList> _entryHistory;
 
@@ -43,9 +43,9 @@ class AppManager : public QObject
 
     Q_INVOKABLE void removePathFromMap(const int &index);
 
-    Q_INVOKABLE void removePathFromListInterface(const int& index);
+    Q_INVOKABLE void removePathFromListInterface(const int &index);
 
-    Q_INVOKABLE void addPathToListInterface(const QString& path);
+    Q_INVOKABLE void addPathToListInterface(const QString &path);
 
     Q_INVOKABLE void clearTableInterface();
 
@@ -55,7 +55,6 @@ class AppManager : public QObject
     inline EventTable *getEventTable() {
       return &_table;
     }
-
 };
 
 #endif // APPMANAGER_H

@@ -27,7 +27,7 @@ Item {
     placeHolderText: "Add path to watch"
 
     onClicked: {
-      text = ""
+      text = "if"
 
       _.selectedPath = AppManager.getFileOrDirectoryPath()
 
@@ -97,14 +97,14 @@ Item {
     width: 100
     height: 40
 
-    text: "Clear"
-
     anchors {
       left: parent.left
       top: eventTable.bottom
       leftMargin: 10
       topMargin: 10
     }
+
+    text: "Clear"
 
     onClicked: {
       AppManager.clearTableInterface()
@@ -118,14 +118,14 @@ Item {
     width: 100
     height: 40
 
-    text: "Start"
-
     anchors {
       left: clearButton.right
       top: eventTable.bottom
       leftMargin: 10
       topMargin: 10
     }
+
+    text: "Start"
 
     onClicked: {
       AppManager.startFileWatcher()
@@ -139,14 +139,14 @@ Item {
     width: 100
     height: 40
 
-    text: "Stop"
-
     anchors {
       left: startButton.right
       top: eventTable.bottom
       leftMargin: 10
       topMargin: 10
     }
+
+    text: "Stop"
 
     onClicked: {
       AppManager.stopFileWatcher()

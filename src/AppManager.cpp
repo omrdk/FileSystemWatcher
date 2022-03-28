@@ -33,17 +33,17 @@ QString AppManager::getFileOrDirectoryPath() const
 // start watcher
 void AppManager::startFileWatcher()
 {
-  connect(&watcher, &QFileSystemWatcher::directoryChanged, this, &AppManager::directorySystemEventTriggered);
+  connect(&_watcher, &QFileSystemWatcher::directoryChanged, this, &AppManager::directorySystemEventTriggered);
 
-  qDebug() << "File watcher started!";
+  qDebug() << "File system watcher started!";
 }
 
 // stop watcher
 void AppManager::stopFileWatcher()
 {
-  disconnect(&watcher, &QFileSystemWatcher::directoryChanged, this, &AppManager::directorySystemEventTriggered);
+  disconnect(&_watcher, &QFileSystemWatcher::directoryChanged, this, &AppManager::directorySystemEventTriggered);
 
-  qDebug() << "File watcher stopped!";
+  qDebug() << "File system watcher stopped!";
 }
 
 // remove given path from entry history and watcher
@@ -51,7 +51,7 @@ void AppManager::removePathFromMap(const int &index)
 {
   QString path = _list.getPathAt(index);
 
-  watcher.removePath(path);
+  _watcher.removePath(path);
 
   _entryHistory.remove(path);
 }
@@ -59,11 +59,11 @@ void AppManager::removePathFromMap(const int &index)
 // add path to watcher
 void AppManager::addPathToFileWatcher(const QString &path)
 {
-  if(!watcher.directories().contains(path))
+  if(!_watcher.directories().contains(path))
   {
-    watcher.addPath(path);
+    _watcher.addPath(path);
 
-    qDebug() << path << " added to file watcher!";
+    qDebug() << path << " added to file system watcher!";
 
     QDir dir(path);
 

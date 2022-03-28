@@ -3,7 +3,7 @@
 EventTable::EventTable(QObject *parent)
   : QAbstractTableModel(parent)
 {
-   m_table.append(header);
+   m_table.append(_header);
 }
 
 int EventTable::rowCount(const QModelIndex &parent) const
@@ -73,5 +73,5 @@ void EventTable::clearTable()
 
   endResetModel();
 
-  addRowToTable(header);
+  addRowToTable(_header);
 }
